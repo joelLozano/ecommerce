@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { loginUserService } from "../../services/userServices"
 import './Login.scss'
 
 export default function Login() {
@@ -14,7 +15,10 @@ const handleSubmit = (event) => {
         email,
         password
     }
-    console.log(datosEnviados)
+    loginUserService(datosEnviados)
+        .then((response) => console.log(response.data))
+        .catch((error) => console.error(error.message))
+    
     setEmail('')
     setPassword('')
 }

@@ -1,4 +1,5 @@
 import useForm from "../../hooks/useForm"
+import { registerUserService } from "../../services/userServices"
 
 export default function Signup() {
   // Paso 1: Crear un objeto con los valores iniciales 
@@ -13,7 +14,9 @@ export default function Signup() {
 
   // Paso 2: Crear una función que se va a ejecutar cuando haga click en botón "Regístrate"
   const enviarDatos = (datos) => {
-    console.log('Datos enviados ', datos)
+    registerUserService(datos)
+      .then((respuesta)=> console.log(respuesta.data))
+      .catch((error)=> console.error(error.message))
   }
 
   // Paso 3: Usar mi custom hook de useForm (primero importarlo)

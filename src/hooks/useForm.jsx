@@ -18,12 +18,13 @@ function useForm (defaultData, callback) {
     const handleSubmit = (event) => {
         event.preventDefault()
         callback(formData)
+        setFormData(defaultData)
     }
 
     // Funcion que maneja los cambios en cada input
     const handleInputChange = (event) => {
         const { name, value } = event.target
-        console.log(name, value)
+        // console.log(name, value)
         setFormData({...formData, [name]: value})
     }
 
