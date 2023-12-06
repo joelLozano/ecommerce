@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getItems } from "../../services/itemServices";
+import { Link } from 'react-router-dom'
 import "./Items.scss";
 
 export default function Items() {
@@ -27,11 +28,13 @@ export default function Items() {
     <section className="items-container">
       <div className="items">
         {items.map((item) => (
-          <div key={item.id} className="item">
+         <Link to={`/item/${item.id}`} key={item.id}>
+          <div  className="item">
             <img src={item.image} />
             <h3>{item.product_name}</h3>
             <p>{item.price}</p>
           </div>
+         </Link>
         ))}
       </div>
     </section>
