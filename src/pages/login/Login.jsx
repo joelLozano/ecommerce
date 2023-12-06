@@ -16,7 +16,7 @@ const handleSubmit = (event) => {
         password
     }
     loginUserService(datosEnviados)
-        .then((response) => window.localStorage.setItem('token', response.data.token))
+        .then((response) => localStorage.setItem('token', response.data.token))
         .catch((error) => console.error(error.message))
     
     setEmail('')
