@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
 import { logoutUserService } from "../../services/userServices";
@@ -6,12 +7,8 @@ import { IoExitSharp } from "react-icons/io5";
 
 import { useAuthContext } from "../../context/AuthContext";
 
-
-
 export default function NavBar() {
-
-  const user = useAuthContext()
-  console.log(user)
+  const { user, isAuth } = useAuthContext();
 
   return (
     <nav className="nav">
@@ -22,19 +19,25 @@ export default function NavBar() {
           <li>
             <NavLink to={"/"}>Home</NavLink>
           </li>
-          <li>
-            <div className="userStyle">
-              <FaCircleUser />
-              <span>Joel</span>
-            </div>
-          </li>
+          {isAuth ? (
+            <li>
+              <div className="userStyle">
+                <FaCircleUser />
+                <span>Joel</span>
+              </div>
+            </li>
+          ) : (
+            <>
+              <li>
+                <NavLink to={"/login"}>Ingresa</NavLink>
+              </li>
+              <li>
+                <NavLink to={"/signup"}>Regístrate</NavLink>
+              </li>
+            </>
+          )}
+          { user.role === "ADMIN" ? <li>settings</li> :  null }
 
-          <li>
-            <NavLink to={"/login"}>Ingresa</NavLink>
-          </li>
-          <li>
-            <NavLink to={"/signup"}>Regístrate</NavLink>
-          </li>
           <li onClick={logoutUserService}>
             <IoExitSharp />
           </li>
