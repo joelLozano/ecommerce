@@ -1,38 +1,45 @@
+import { NavLink } from "react-router-dom";
+import "./NavBar.scss";
+import { logoutUserService } from "../../services/userServices";
+import { FaCircleUser } from "react-icons/fa6";
+import { IoExitSharp } from "react-icons/io5";
 
-import { NavLink } from 'react-router-dom'
-import './NavBar.scss'
-import { logoutUserService } from '../../services/userServices'
+import { useAuthContext } from "../../context/AuthContext";
+
+
 
 export default function NavBar() {
 
+  const user = useAuthContext()
+  console.log(user)
+
   return (
-   <nav className='nav'>
-    <div className='nav__logo'>Logo</div>
+    <nav className="nav">
+      <div className="nav__logo">Logo</div>
 
-    <div className='nav__options'>
+      <div className="nav__options">
         <ul>
-            <li>
-              <NavLink to={'/'}>
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={'/login'}>
-                Ingresa
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={'/signup'}>
-                Regístrate
-              </NavLink>
-            </li>
+          <li>
+            <NavLink to={"/"}>Home</NavLink>
+          </li>
+          <li>
+            <div className="userStyle">
+              <FaCircleUser />
+              <span>Joel</span>
+            </div>
+          </li>
 
-            <li onClick={logoutUserService}>
-              Logout
-            </li>
-
+          <li>
+            <NavLink to={"/login"}>Ingresa</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/signup"}>Regístrate</NavLink>
+          </li>
+          <li onClick={logoutUserService}>
+            <IoExitSharp />
+          </li>
         </ul>
-    </div>
-   </nav>
-  )
+      </div>
+    </nav>
+  );
 }

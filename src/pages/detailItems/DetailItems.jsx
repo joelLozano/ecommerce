@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { getItem } from '../../services/itemServices'
+import { useParams } from 'react-router-dom'
 
 export default function DetailItems() {
 
     const [item , setItem] = useState()
     const [loading, setLoading] = useState(true)
+    const { id } = useParams()
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getItem('5fbc19a65a3f794d72471165')
+                const data = await getItem(id)
             setItem(data.data)
             console.log(data);
             setLoading(false)
