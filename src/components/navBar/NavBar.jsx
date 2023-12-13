@@ -6,9 +6,22 @@ import { FaCircleUser } from "react-icons/fa6";
 import { IoExitSharp } from "react-icons/io5";
 
 import { useAuthContext } from "../../context/AuthContext";
+import { getUser } from "../../services/userServices";
 
 export default function NavBar() {
   const { user, isAuth } = useAuthContext();
+  const [userData, setuserData] = useState();
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token')
+    if (token) {
+      getUser(token)
+          .then((response) => {
+            setuserData(response.data);
+          })
+          .catch((error) => console.error(error.message));
+    }
+  }, [])
 
   return (
     <nav className="nav">
@@ -23,7 +36,7 @@ export default function NavBar() {
             <li>
               <div className="userStyle">
                 <FaCircleUser />
-                <span>Joel</span>
+                <span>{userData && userData.first_name}</span>
               </div>
             </li>
           ) : (

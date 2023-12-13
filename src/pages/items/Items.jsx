@@ -11,7 +11,6 @@ export default function Items() {
     const getData = async () => {
       try {
         const response = await getItems();
-        console.log(response.data);
         setItems(response.data);
         setLoading(false);
       } catch (error) {

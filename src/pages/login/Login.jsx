@@ -16,7 +16,9 @@ const handleSubmit = (event) => {
         password
     }
     loginUserService(datosEnviados)
-        .then((response) => localStorage.setItem('token', response.data.token))
+        .then((response) => {
+            localStorage.setItem('token', response.data.token)}) // guardo el token en el localStorage
+        .then(() => window.location.href = '/') // me redirige a la ruta raíz
         .catch((error) => console.error(error.message))
     
     setEmail('')

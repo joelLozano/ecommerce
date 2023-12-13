@@ -13,10 +13,22 @@ const registerUserService = (data) => {
 // funcion para hacer el logout
 const logoutUserService = () => {
     localStorage.removeItem('token')
+    window.location.href = '/'
+}
+
+const getUser = (token) => {
+    const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+    return axios.get(`${BASE_URL}/users/me`, config)
 }
 
 export {
     loginUserService,
     registerUserService,
-    logoutUserService
+    logoutUserService,
+    getUser
 }
