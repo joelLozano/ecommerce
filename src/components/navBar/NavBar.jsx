@@ -36,7 +36,7 @@ export default function NavBar() {
             <li>
               <div className="userStyle">
                 <FaCircleUser />
-                <span>{userData && userData.first_name}</span>
+                <span id="userName">{userData && userData.first_name}</span>
               </div>
             </li>
           ) : (
